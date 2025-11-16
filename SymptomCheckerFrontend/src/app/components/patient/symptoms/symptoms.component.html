@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Symptom Analysis</h2>
+  
+  <div class="card mb-4">
+    <div class="card-body">
+      <form [formGroup]="symptomForm" (ngSubmit)="analyzeSymptoms()">
+        <div class="mb-3">
+          <label class="form-label">Describe your symptoms</label>
+          <textarea class="form-control" rows="4" formControlName="symptoms" 
+            placeholder="Please describe your symptoms in detail..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="symptomForm.invalid || isLoading">
+          {{ isLoading ? 'Analyzing...' : 'Analyze Symptoms' }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="analysisResult" class="card mb-4">
+    <div class="card-header">
+      <h5>Analysis Results</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h6 class="text-primary">Predicted Disease</h6>
+          <p>{{ analysisResult.predictedDisease }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6 class="text-warning">Possible Cause</h6>
+          <p>{{ analysisResult.cause }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6 class="text-success">Recommended Treatment</h6>
+          <p>{{ analysisResult.cure }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6 class="text-info">Recommended Specialty</h6>
+          <p>{{ analysisResult.recommendedSpecialty }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="recommendedDoctors.length > 0" class="card">
+    <div class="card-header">
+      <h5>Recommended Doctors</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-3" *ngFor="let doctor of recommendedDoctors">
+          <div class="card">
+            <div class="card-body">
+              <h6>{{ doctor.name }}</h6>
+              <p class="text-muted mb-2">{{ doctor.phone }}</p>
+              <p class="text-muted mb-2">{{ doctor.email }}</p>
+              <button class="btn btn-primary btn-sm" (click)="bookAppointment(doctor.doctorId)">
+                Book Appointment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

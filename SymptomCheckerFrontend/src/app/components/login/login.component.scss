@@ -1,0 +1,38 @@
+.card {
+  border-radius: 15px;
+  border: none;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+}
+
+.bg-light {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Manage Patients</h2>
+    <button class="btn btn-primary" (click)="showAdd()">
+      <i class="fas fa-plus me-1"></i>Add Patient
+    </button>
+  </div>
+
+  <div *ngIf="showAddForm" class="card mb-4">
+    <div class="card-header">
+      <h5>{{ editingPatient ? 'Edit Patient' : 'Add New Patient' }}</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="patientForm" (ngSubmit)="savePatient()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                [readonly]="editingPatient"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3" *ngIf="!editingPatient">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" formControlName="password" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" formControlName="phone" />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-success" [disabled]="isLoading">
+            {{ isLoading ? 'Saving...' : 'Save' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div *ngIf="patients.length === 0" class="text-center py-4">
+        <p class="text-muted">No patients found</p>
+      </div>
+
+      <div class="table-responsive" *ngIf="patients.length > 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.email }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>{{ patient.dateCreated | date : 'shortDate' }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editPatient(patient)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="deletePatient(patient.patientId)"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Appointments</h2>
+    <button class="btn btn-primary" (click)="showBookingForm = !showBookingForm">
+      Book New Appointment
+    </button>
+  </div>
+
+  <div *ngIf="showBookingForm" class="card mb-4">
+    <div class="card-header">
+      <h5>Book New Appointment</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="bookingForm" (ngSubmit)="bookAppointment()">
+        <div class="mb-3">
+          <label class="form-label">Select Doctor</label>
+          <select class="form-select" formControlName="doctorId">
+            <option value="">Choose a doctor...</option>
+            <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+              {{ doctor.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date & Time</label>
+          <input type="datetime-local" class="form-control" formControlName="appointmentDate" />
+        </div>
+
+        <div class="d-flex gap-2">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="bookingForm.invalid || isBooking"
+          >
+            {{ isBooking ? 'Booking...' : 'Book Appointment' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="showBookingForm = false">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div *ngIf="appointments.length === 0" class="text-center py-4">
+        <p class="text-muted">No appointments found</p>
+      </div>
+
+      <div *ngFor="let appointment of appointments" class="card mb-3">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h6 class="mb-1">Dr. {{ appointment.doctorName }}</h6>
+              <p class="text-muted mb-1">
+                <i class="fas fa-calendar-alt me-2"></i>
+                {{ appointment.dateTime | date : 'medium' }}
+              </p>
+            </div>
+            <div class="col-md-4 text-end">
+              <span
+                class="badge fs-6 px-3 py-2"
+                [class.bg-success]="appointment.status === 'Confirmed'"
+                [class.bg-warning]="appointment.status === 'Scheduled'"
+                [class.bg-info]="appointment.status === 'Completed'"
+                [class.bg-secondary]="appointment.status === 'Rejected'"
+              >
+                {{ appointment.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

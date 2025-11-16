@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Appointments</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div *ngIf="appointments.length === 0" class="text-center py-4">
+        <p class="text-muted">No appointments found</p>
+      </div>
+
+      <div *ngFor="let appointment of appointments" class="card mb-3">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <h6 class="mb-1">{{ appointment.patientName }}</h6>
+              <p class="text-muted mb-1">
+                <i class="fas fa-calendar-alt me-2"></i>
+                {{ appointment.dateTime | date : 'medium' }}
+              </p>
+            </div>
+            <div class="col-md-3">
+              <span
+                class="badge fs-6 px-3 py-2"
+                [class.bg-success]="appointment.status === 'Confirmed'"
+                [class.bg-warning]="appointment.status === 'Scheduled'"
+                [class.bg-info]="appointment.status === 'Completed'"
+                [class.bg-danger]="appointment.status === 'Rejected'"
+              >
+                {{ appointment.status }}
+              </span>
+            </div>
+            <div class="col-md-3">
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary btn-sm dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  [disabled]="isUpdating"
+                >
+                  Update Status
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      (click)="updateAppointmentStatus(appointment.appointmentId, 'Scheduled')"
+                    >
+                      Scheduled
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      (click)="updateAppointmentStatus(appointment.appointmentId, 'Completed')"
+                    >
+                      Completed
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item text-danger"
+                      (click)="updateAppointmentStatus(appointment.appointmentId, 'Rejected')"
+                    >
+                      Rejected
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

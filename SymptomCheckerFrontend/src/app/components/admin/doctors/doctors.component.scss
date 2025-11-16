@@ -1,0 +1,32 @@
+.specialty-checkboxes {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  padding-left: 2rem;
+  background-color: #f8f9fa;
+}
+
+.form-check {
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+}

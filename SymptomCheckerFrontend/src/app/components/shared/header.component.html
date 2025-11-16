@@ -1,0 +1,99 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-light me-3" (click)="goBack()" *ngIf="currentUser">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <a class="navbar-brand" routerLink="/">
+        <i class="fas fa-heartbeat me-2"></i>
+        Symptom Checker
+      </a>
+    </div>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Patient Navigation -->
+      <ul class="navbar-nav me-auto" *ngIf="currentUser?.userType === 'patient'">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patient/dashboard" routerLinkActive="active">
+            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patient/symptoms" routerLinkActive="active">
+            <i class="fas fa-stethoscope me-1"></i>Analyze Symptoms
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patient/appointments" routerLinkActive="active">
+            <i class="fas fa-calendar-check me-1"></i>Appointments
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patient/profile" routerLinkActive="active">
+            <i class="fas fa-user me-1"></i>Profile
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Doctor Navigation -->
+      <ul class="navbar-nav me-auto" *ngIf="currentUser?.userType === 'doctor'">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/doctor/dashboard" routerLinkActive="active">
+            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/doctor/appointments" routerLinkActive="active">
+            <i class="fas fa-calendar-check me-1"></i>Appointments
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/doctor/profile" routerLinkActive="active">
+            <i class="fas fa-user-md me-1"></i>Profile
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Admin Navigation -->
+      <ul class="navbar-nav me-auto" *ngIf="currentUser?.userType === 'admin'">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
+            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/doctors" routerLinkActive="active">
+            <i class="fas fa-user-md me-1"></i>Doctors
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/patients" routerLinkActive="active">
+            <i class="fas fa-users me-1"></i>Patients
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/profile" routerLinkActive="active">
+            <i class="fas fa-user-shield me-1"></i>Profile
+          </a>
+        </li>
+      </ul>
+      
+      <!-- User Dropdown -->
+      <div class="navbar-nav" *ngIf="currentUser">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fas fa-user me-1"></i>
+            {{ currentUser.name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
