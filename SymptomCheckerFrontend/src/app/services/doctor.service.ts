@@ -24,4 +24,8 @@ export class DoctorService {
   getDoctorsBySpecialty(specialty: string): Observable<Doctor[]> {
     return this.apiService.get<Doctor[]>(`doctors/specialty/${specialty}`);
   }
+
+  deleteDoctor(id: number): Observable<string> {
+    return this.apiService.delete<string>(`admin/doctors/${id}`);
+  }
 }

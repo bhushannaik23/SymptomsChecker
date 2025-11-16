@@ -89,8 +89,15 @@ export class AdminPatientsComponent implements OnInit {
 
   deletePatient(patientId: number) {
     if (confirm('Are you sure you want to delete this patient?')) {
-      // Note: Delete patient API needs to be implemented in backend
-      alert('Delete patient functionality needs backend implementation');
+      this.patientService.deletePatient(patientId).subscribe({
+        next: () => {
+          this.loadPatients();
+          alert('Patient deleted successfully!');
+        },
+        error: (error) => {
+          alert('Failed to delete patient');
+        }
+      });
     }
   }
 

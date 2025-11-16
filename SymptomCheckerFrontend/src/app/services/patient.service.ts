@@ -24,4 +24,8 @@ export class PatientService {
   updatePatient(id: number, patient: UpdatePatientRequest): Observable<Patient> {
     return this.apiService.put<Patient>(`patients/${id}`, patient);
   }
+
+  deletePatient(id: number): Observable<string> {
+    return this.apiService.delete<string>(`admin/patients/${id}`);
+  }
 }

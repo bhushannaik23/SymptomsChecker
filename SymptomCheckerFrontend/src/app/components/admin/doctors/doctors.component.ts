@@ -125,8 +125,15 @@ export class AdminDoctorsComponent implements OnInit {
 
   deleteDoctor(doctorId: number) {
     if (confirm('Are you sure you want to delete this doctor?')) {
-      // Note: Delete doctor API needs to be implemented in backend
-      alert('Delete doctor functionality needs backend implementation');
+      this.doctorService.deleteDoctor(doctorId).subscribe({
+        next: () => {
+          this.loadDoctors();
+          alert('Doctor deleted successfully!');
+        },
+        error: (error) => {
+          alert('Failed to delete doctor');
+        }
+      });
     }
   }
 
