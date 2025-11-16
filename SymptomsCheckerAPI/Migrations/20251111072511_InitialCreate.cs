@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SymptomsCheckerAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,7 +75,7 @@ namespace SymptomsCheckerAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointment",
+                name: "Appointments",
                 columns: table => new
                 {
                     AppointmentId = table.Column<int>(type: "int", nullable: false)
@@ -87,15 +87,15 @@ namespace SymptomsCheckerAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointment", x => x.AppointmentId);
+                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                     table.ForeignKey(
-                        name: "FK_Appointment_Doctors_DoctorId",
+                        name: "FK_Appointments_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "DoctorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Appointment_Patients_PatientId",
+                        name: "FK_Appointments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "PatientId",
@@ -131,7 +131,7 @@ namespace SymptomsCheckerAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SymptomInput",
+                name: "SymptomInputs",
                 columns: table => new
                 {
                     SymptomInputId = table.Column<int>(type: "int", nullable: false)
@@ -142,9 +142,9 @@ namespace SymptomsCheckerAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SymptomInput", x => x.SymptomInputId);
+                    table.PrimaryKey("PK_SymptomInputs", x => x.SymptomInputId);
                     table.ForeignKey(
-                        name: "FK_SymptomInput_Patients_PatientId",
+                        name: "FK_SymptomInputs_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "PatientId",
@@ -178,13 +178,13 @@ namespace SymptomsCheckerAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointment_DoctorId",
-                table: "Appointment",
+                name: "IX_Appointments_DoctorId",
+                table: "Appointments",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointment_PatientId",
-                table: "Appointment",
+                name: "IX_Appointments_PatientId",
+                table: "Appointments",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
@@ -208,8 +208,8 @@ namespace SymptomsCheckerAPI.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SymptomInput_PatientId",
-                table: "SymptomInput",
+                name: "IX_SymptomInputs_PatientId",
+                table: "SymptomInputs",
                 column: "PatientId");
         }
 
@@ -220,7 +220,7 @@ namespace SymptomsCheckerAPI.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Appointment");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "DoctorSpecialties");
@@ -229,7 +229,7 @@ namespace SymptomsCheckerAPI.Migrations
                 name: "PatientHistories");
 
             migrationBuilder.DropTable(
-                name: "SymptomInput");
+                name: "SymptomInputs");
 
             migrationBuilder.DropTable(
                 name: "Specialties");

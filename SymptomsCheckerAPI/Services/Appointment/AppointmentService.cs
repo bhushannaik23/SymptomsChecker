@@ -21,8 +21,9 @@ namespace Symptoms_Checker.Services
             {
                 AppointmentId = a.AppointmentId,
                 PatientId = a.PatientId,
+                PatientName = a.Patient?.Name ?? "Unknown Patient",
                 DoctorId = a.DoctorId,
-                DoctorName = a.Doctor.Name,
+                DoctorName = a.Doctor?.Name ?? "Unknown Doctor",
                 DateTime = a.DateTime,
                 Status = a.Status
             });
@@ -54,12 +55,17 @@ namespace Symptoms_Checker.Services
             };
 
             var createdAppointment = await _appointmentRepository.CreateAsync(appointment);
-
+            
+            // Fetch the appointment with related entities to get names
+            var appointmentWithDetails = await _appointmentRepository.GetByIdAsync(createdAppointment.AppointmentId);
+            
             return new AppointmentDto
             {
                 AppointmentId = createdAppointment.AppointmentId,
                 PatientId = createdAppointment.PatientId,
+                PatientName = appointmentWithDetails?.Patient?.Name ?? "Unknown Patient",
                 DoctorId = createdAppointment.DoctorId,
+                DoctorName = appointmentWithDetails?.Doctor?.Name ?? "Unknown Doctor",
                 DateTime = createdAppointment.DateTime,
                 Status = createdAppointment.Status
             };

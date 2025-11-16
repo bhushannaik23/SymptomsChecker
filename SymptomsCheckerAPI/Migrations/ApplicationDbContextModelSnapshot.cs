@@ -79,7 +79,7 @@ namespace SymptomsCheckerAPI.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Symptoms_Checker.Models.Doctor", b =>
@@ -245,7 +245,7 @@ namespace SymptomsCheckerAPI.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("SymptomInput");
+                    b.ToTable("SymptomInputs");
                 });
 
             modelBuilder.Entity("Symptoms_Checker.Models.Appointment", b =>

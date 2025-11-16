@@ -17,6 +17,7 @@ namespace Symptoms_Checker.Repositories
         {
             return await _context.Appointments
                 .Include(a => a.Doctor)
+                .Include(a => a.Patient)
                 .Where(a => a.PatientId == patientId)
                 .OrderByDescending(a => a.DateTime)
                 .ToListAsync();
@@ -47,7 +48,10 @@ namespace Symptoms_Checker.Repositories
 
         public async Task<Appointment?> GetByIdAsync(int id)
         {
-            return await _context.Appointments.FindAsync(id);
+            return await _context.Appointments
+                .Include(a => a.Doctor)
+                .Include(a => a.Patient)
+                .FirstOrDefaultAsync(a => a.AppointmentId == id);
         }
     }
 }

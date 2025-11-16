@@ -24,7 +24,7 @@ namespace Symptoms_Checker.Services
 
             try
             {
-                var prompt = $"Analyze these symptoms: {symptoms}\n\nRespond with a JSON object in this exact format:\n{{\n \"predicted_disease\",\n \"cause\": \"likely cause\",\n \"cure\": \"recommended treatment\",\n \"recommended_specialty\": \"medical specialty\"\n}}\n\nKeep responses concise and medical.";
+                var prompt = $"Analyze these symptoms: {symptoms}\n\nRespond with a JSON object in this exact format:\n{{\n \"predicted_disease\": \"disease name\",\n \"cause\": \"likely cause\",\n \"cure\": \"recommended treatment\",\n \"recommended_specialty\": \"medical specialty\"\n}}\n\nKeep responses for recommended specialty in one word and other response concise and medical.";
 
                 var requestBody = new
                 {
@@ -129,7 +129,7 @@ namespace Symptoms_Checker.Services
 
                 return new SymptomAnalysisResponseDto
                 {
-                    PredictedDisease = parsed.RootElement.GetProperty("predicted_Disease").GetString() ?? "Unknown Disease",
+                    PredictedDisease = parsed.RootElement.GetProperty("predicted_disease").GetString() ?? "Unknown Disease",
                     Cause = parsed.RootElement.GetProperty("cause").GetString() ?? "Unknown Cause",
                     Cure = parsed.RootElement.GetProperty("cure").GetString() ?? "Consult a doctor",
                     RecommendedSpecialty = parsed.RootElement.GetProperty("recommended_specialty").GetString() ?? "General Medicine",

@@ -45,5 +45,15 @@ namespace Symptoms_Checker.Controllers
             var doctors = await _doctorService.GetAllDoctorsAsync();
             return Ok(doctors);
         }
+
+        [HttpDelete("doctors/{id}")]
+        public async Task<ActionResult> DeleteDoctor(int id)
+        {
+            var result = await _doctorService.DeleteDoctorAsync(id);
+            if (!result)
+                return NotFound("Doctor not found");
+            return Ok("Doctor deleted succssfully");
+           
+        }
     }
 }

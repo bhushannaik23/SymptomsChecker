@@ -12,8 +12,8 @@ using Symptoms_Checker.Data;
 namespace SymptomsCheckerAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251110073739_initial")]
-    partial class initial
+    [Migration("20251111072511_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,7 +82,7 @@ namespace SymptomsCheckerAPI.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Symptoms_Checker.Models.Doctor", b =>
@@ -248,7 +248,7 @@ namespace SymptomsCheckerAPI.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("SymptomInput");
+                    b.ToTable("SymptomInputs");
                 });
 
             modelBuilder.Entity("Symptoms_Checker.Models.Appointment", b =>
